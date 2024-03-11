@@ -11,9 +11,6 @@ import './countries.dart';
 import './phone_number.dart';
 
 class IntlPhoneField extends StatefulWidget {
-  /// The TextFormField key.
-  final GlobalKey<FormFieldState>? formFieldKey;
-
   /// Whether to hide the text being edited (e.g., for passwords).
   final bool obscureText;
 
@@ -243,15 +240,11 @@ class IntlPhoneField extends StatefulWidget {
   /// If unset, defaults to [EdgeInsets.zero].
   final EdgeInsets flagsButtonMargin;
 
-  /// Enable the autofill hint for phone number.
+  //enable the autofill hint for phone number
   final bool disableAutoFillHints;
-
-  /// If null, default magnification configuration will be used.
-  final TextMagnifierConfiguration? magnifierConfiguration;
 
   const IntlPhoneField({
     Key? key,
-    this.formFieldKey,
     this.initialCountryCode,
     this.languageCode = 'en',
     this.disableAutoFillHints = false,
@@ -295,11 +288,10 @@ class IntlPhoneField extends StatefulWidget {
     this.showCursor = true,
     this.pickerDialogStyle,
     this.flagsButtonMargin = EdgeInsets.zero,
-    this.magnifierConfiguration,
   }) : super(key: key);
 
   @override
-  State<IntlPhoneField> createState() => _IntlPhoneFieldState();
+  _IntlPhoneFieldState createState() => _IntlPhoneFieldState();
 }
 
 class _IntlPhoneFieldState extends State<IntlPhoneField> {
@@ -382,7 +374,6 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      key: widget.formFieldKey,
       initialValue: (widget.controller == null) ? number : null,
       autofillHints: widget.disableAutoFillHints ? null : [AutofillHints.telephoneNumberNational],
       readOnly: widget.readOnly,
@@ -398,7 +389,6 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
       cursorWidth: widget.cursorWidth,
       showCursor: widget.showCursor,
       onFieldSubmitted: widget.onSubmitted,
-      magnifierConfiguration: widget.magnifierConfiguration,
       decoration: widget.decoration.copyWith(
         prefixIcon: _buildFlagsButton(),
         counterText: !widget.enabled ? '' : null,
